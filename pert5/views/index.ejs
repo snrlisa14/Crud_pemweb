@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Node JS - MySQL</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5e8d4;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #795548;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        h2 {
+            color: #795548;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+            color: #6c757d;
+        }
+        .table-warning {
+            background-color: #f7c094 !important;
+        }
+        .btn-edit {
+            color: #fff;
+            background-color: #795548;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn-edit:hover {
+            background-color: #5d4037;
+        }
+        .btn-delete {
+            color: #fff;
+            background-color: #ff7043;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn-delete:hover {
+            background-color: #e64a19;
+        }
+        form {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        .btn-warning {
+            width: 100%;
+            background-color: #ff9800;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn-warning:hover {
+            background-color: #fb8c00;
+        }
+        .form-label {
+            color: #6d4c41;
+        }
+        /* Style for the prompt */
+        .prompt {
+            background-color: #ffcc80;
+            border-left: 5px solid #ff9800;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #6d4c41;
+            font-size: 18px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Prompt -->
+        <div class="prompt">
+            Selamat datang di halaman daftar pengguna! Anda dapat mengelola data pengguna dengan mudah melalui tabel ini.
+        </div>
+
+        <h1 class="text-center">Tabel Daftar Pengguna</h1>
+        <table class="table table-bordered table-striped">
+            <thead class="table-warning">
+                <tr>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Telepon</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(pengguna => {%>
+                <tr>
+                    <td><%= pengguna.id %></td>
+                    <td><%= pengguna.name %></td>
+                    <td><%= pengguna.email %></td>
+                    <td><%= pengguna.phone %></td>
+                    <td>
+                        <a href="/edit/<%= pengguna.id %>" class="btn btn-edit btn-sm" onclick="showEditAlert()">Edit</a>
+                        <a href="/delete/<%= pengguna.id %>" class="btn btn-delete btn-sm" onclick="showDeleteAlert()">Hapus</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <br>
+        <h2 class="text-center">Tambah Pengguna Baru</h2>
+        <form action="/add" method="post">
+            <div class="mb-3">
+                <label for="id" class="form-label">ID</label>
+                <input type="number" id="id" name="id" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Nama:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" name="email" id="email" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Telepon:</label>
+                <input type="tel" name="phone" id="phone" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-warning">Tambah</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Alert Script -->
+    <script>
+        function showEditAlert() {
+            alert('Sepertinya anda ingin mengedit. Lanjutkan?');
+        }
+
+        function showDeleteAlert() {
+            alert('Data pengguna akan dihapus. Lanjutkan?');
+        }
+    </script>
+</body>
+</html>
